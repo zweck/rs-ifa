@@ -18,7 +18,7 @@ page-service-categories {
       opacity: .6;
     }
     input {
-      background-color: rgb(62, 169, 159);
+      background-color: map-get($colors, "primary");
       border: 0;
       width: 100%;
       padding: 5px 10px 5px 30px;

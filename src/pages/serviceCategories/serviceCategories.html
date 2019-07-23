@@ -37,10 +37,10 @@
 
     <ul class="list">
       <li
-        *ngFor="let vendor of vendors; let i = index"
+        *ngFor="let vendorCategoryGroup of vendors; let i = index"
+        [hidden]="shouldHideVendorGroup(vendorCategoryGroup)"
         [attr.data-index]="i"
-        [className]="currentIndex == i ? 'active' : ''"
-        [hidden]="shouldHideVendor(vendor)"
+        [className]="currentIndex === i ? 'active' : ''"
       >
         <a
           (click)="handleSectionClick(i)"
@@ -48,35 +48,37 @@
           <i
             class="fa fa-chevron-down"
           ></i>
-          {{vendor.VendorCategory.name}}
+          {{vendorCategoryGroup.VendorCategory.name}}
         </a>
 
-        <div [hidden]="currentIndex != i">
+        <div
+          *ngFor="let vendor of vendorCategoryGroup.Vendor; let idx = index"
+          [hidden]="currentIndex !== i || shouldHideVendor(vendor)">
           <div class="header">
             <i
               class="fa fa-heart"
               (click)="addToFavourites(vendor)"
               [ngClass]="{'fa': true, 'fa-heart-o black': !vendor.favourite, 'fa-heart red': vendor.favourite}"
             ></i>
-            <div class="title">{{ vendor.Vendor[0].company_name }}</div>
+            <div class="title">{{ vendor.company_name }}</div>
             <a
               class="select-button"
               (click)="selectVendor(vendor)"
-              [ngClass]="{'selected': selectedVendor && vendor.Vendor[0].id == selectedVendor.Vendor[0].id }"
+              [ngClass]="{'selected': selectedVendor && vendor.id == selectedVendor.id }"
             >
               select
             </a>
           </div>
-          <div class="blurb">{{ vendor.Vendor[0].blurb }}</div>
-          <pre class="description">{{ vendor.Vendor[0].description }}</pre>
+          <div class="blurb">{{ vendor.blurb }}</div>
+          <pre class="description">{{ vendor.description }}</pre>
           <video
             controls
             preload="none"
-            [poster]="storage.primaryDomain + vendor.Vendor[0].video_thumb"
-            *ngIf="vendor.Vendor[0].video_url"
+            [poster]="storage.primaryDomain + vendor.video_thumb"
+            *ngIf="vendor.video_url"
           >
             <source
-              [src]="storage.primaryDomain + vendor.Vendor[0].video_url"
+              [src]="storage.primaryDomain + vendor.video_url"
               type="video/mp4"
             >
             <p>Video not supported.</p>

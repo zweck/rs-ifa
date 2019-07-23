@@ -48,7 +48,7 @@ export class ServiceCategoriesPage {
     loader.present();
 
     this.http.get(
-      `${this.storage.baseUrl}/favourite/${vendor.Vendor[0].id}?${ this.storage.getAuthHelper() }`
+      `${this.storage.baseUrl}/favourite/${vendor.id}?${ this.storage.getAuthHelper() }`
     )
       .map((res:Response) => res.json())
       .subscribe(
@@ -69,7 +69,7 @@ export class ServiceCategoriesPage {
   }
 
   selectVendor(vendor){
-    if(this.selectedVendor && this.selectedVendor.Vendor[0].id == vendor.Vendor[0].id){
+    if(this.selectedVendor && this.selectedVendor.id == vendor.id){
       this.selectedVendor = null;
     }else{
       this.selectedVendor = vendor;
@@ -91,19 +91,29 @@ export class ServiceCategoriesPage {
       });
 
       this.api.getFavourites().then(response => {
-        this.vendors.forEach(vendor => {
-          vendor.favourite = response['response']['includes'](parseInt(vendor.Vendor[0].id));
+        const favourites = response['response'];
+        this.vendors = this.vendors.map(({ Vendor, ...vendorObject }) => {
+          return {
+            ...vendorObject,
+            Vendor: Vendor.map(
+                vendor => ({ ...vendor, favourite: favourites.includes(parseInt(vendor.id)) })
+            )
+          }
         });
-      })
-
-
-      // this.navCtrl.push(ReferralDetailsPage, {vendor: this.vendors[0]})
+      });
     });
 
   }
 
+    shouldHideVendorGroup(vendorGroup){
+        return !(
+            (this.onlyFavourites ? vendorGroup.Vendor.find(({ favourite }) => favourite) : true) &&
+                vendorGroup.Vendor.find(vendor => vendor.company_name.includes(this.search))
+        )
+    }
+
   shouldHideVendor(vendor){
-    return !((this.onlyFavourites ? vendor.favourite : true) && vendor.VendorCategory.name.includes(this.search))
+    return !((this.onlyFavourites ? vendor.favourite : true) && vendor.company_name.includes(this.search))
   }
 
   goToReferralDetails(){
