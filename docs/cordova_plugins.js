@@ -291,14 +291,14 @@ module.exports.metadata =
     "cordova-plugin-device": "1.1.7",
     "cordova-plugin-ionic-webview": "1.2.1",
     "cordova-plugin-splashscreen": "4.1.0",
-    "cordova-plugin-whitelist": "1.3.3",
+    "cordova-plugin-whitelist": "1.3.4",
     "ionic-plugin-keyboard": "2.2.1",
     "cordova-plugin-compat": "1.2.0",
     "cordova-plugin-camera": "2.4.1",
     "cordova-plugin-file": "4.3.3",
     "cordova-plugin-file-transfer": "1.7.1",
-    "cordova-plugin-filepath": "1.5.1",
-    "cordova-plugin-statusbar": "2.4.2"
+    "cordova-plugin-filepath": "1.5.7",
+    "cordova-plugin-statusbar": "2.4.3"
 }
 // BOTTOM OF METADATA
 });

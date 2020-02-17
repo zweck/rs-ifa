@@ -551,8 +551,7 @@ var GlobalStorage = (function () {
             loginVars: false,
             type: ""
         };
-        this.primaryDomain = 'http://139.59.178.1:4000/';
-        // public primaryDomain: string = 'http://refersquare-dev.businessapps.co.uk';
+        this.primaryDomain = 'http://157.245.36.90:4000/';
         this.baseUrl = this.primaryDomain + "/api";
         this.authHelper = function () {
             var date = Math.floor(new Date().getTime() / 1000).toString();
@@ -1760,6 +1759,14 @@ WithdrawalHistoryFiltersPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__referralDetails_referralDetails__ = __webpack_require__(421);
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1768,6 +1775,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
+            t[p[i]] = s[p[i]];
+    return t;
 };
 
 
@@ -1802,7 +1818,7 @@ var ServiceCategoriesPage = (function () {
     ServiceCategoriesPage.prototype.addToFavourites = function (vendor) {
         var loader = this.loadingCtrl.create();
         loader.present();
-        this.http.get(this.storage.baseUrl + "/favourite/" + vendor.Vendor[0].id + "?" + this.storage.getAuthHelper())
+        this.http.get(this.storage.baseUrl + "/favourite/" + vendor.id + "?" + this.storage.getAuthHelper())
             .map(function (res) { return res.json(); })
             .subscribe(function (response) {
             vendor.favourite = response['response']['new_value'];
@@ -1814,12 +1830,12 @@ var ServiceCategoriesPage = (function () {
     ServiceCategoriesPage.prototype.showFavouritesOnly = function () {
         this.onlyFavourites = !this.onlyFavourites;
     };
-    ServiceCategoriesPage.prototype.selectVendor = function (vendor) {
-        if (this.selectedVendor && this.selectedVendor.Vendor[0].id == vendor.Vendor[0].id) {
+    ServiceCategoriesPage.prototype.selectVendor = function (vendor, vendorCategory) {
+        if (this.selectedVendor && this.selectedVendor.vendor.id == vendor.id) {
             this.selectedVendor = null;
         }
         else {
-            this.selectedVendor = vendor;
+            this.selectedVendor = { vendor: vendor, vendorCategory: vendorCategory };
         }
     };
     ServiceCategoriesPage.prototype.getVendors = function () {
@@ -1838,15 +1854,24 @@ var ServiceCategoriesPage = (function () {
                 }
             });
             _this.api.getFavourites().then(function (response) {
-                _this.vendors.forEach(function (vendor) {
-                    vendor.favourite = response['response']['includes'](parseInt(vendor.Vendor[0].id));
+                var favourites = response['response'];
+                _this.vendors = _this.vendors.map(function (_a) {
+                    var Vendor = _a.Vendor, vendorObject = __rest(_a, ["Vendor"]);
+                    return __assign({}, vendorObject, { Vendor: Vendor.map(function (vendor) { return (__assign({}, vendor, { favourite: favourites.includes(parseInt(vendor.id)) })); }) });
                 });
             });
-            // this.navCtrl.push(ReferralDetailsPage, {vendor: this.vendors[0]})
         });
     };
+    ServiceCategoriesPage.prototype.shouldHideVendorGroup = function (vendorGroup) {
+        var _this = this;
+        return !((this.onlyFavourites ? vendorGroup.Vendor.find(function (_a) {
+            var favourite = _a.favourite;
+            return favourite;
+        }) : true) &&
+            vendorGroup.Vendor.find(function (vendor) { return vendor.company_name.includes(_this.search); }));
+    };
     ServiceCategoriesPage.prototype.shouldHideVendor = function (vendor) {
-        return !((this.onlyFavourites ? vendor.favourite : true) && vendor.VendorCategory.name.includes(this.search));
+        return !((this.onlyFavourites ? vendor.favourite : true) && vendor.company_name.includes(this.search));
     };
     ServiceCategoriesPage.prototype.goToReferralDetails = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__referralDetails_referralDetails__["a" /* ReferralDetailsPage */], { vendor: this.selectedVendor });
@@ -1855,7 +1880,7 @@ var ServiceCategoriesPage = (function () {
 }());
 ServiceCategoriesPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-service-categories',template:/*ion-inline-start:"/home/phauser/Development/refersquare/ReferSquare-mobile/src/pages/serviceCategories/serviceCategories.html"*/'<ion-header>\n  <ion-navbar>\n    <div class="ion-title">Service Categories</div>\n    <button ion-button icon-only menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n\n  <div\n    class="search-container"\n  >\n    <input\n      type="text"\n      [(ngModel)]="search"\n      placeholder="Search Service Providers"\n    />\n    <i class="fa fa-search"></i>\n  </div>\n\n  <div\n    class="container"\n  >\n    <a\n      class="gray-button"\n      (click)="showFavouritesOnly()"\n    >\n      {{ onlyFavourites ? "Show All" : "Show Favourites Only" }}\n    </a>\n\n    <p\n      class="center"\n    >\n      (Expand a category, and select a Service Provider)\n    </p>\n\n    <ul class="list">\n      <li\n        *ngFor="let vendor of vendors; let i = index"\n        [attr.data-index]="i"\n        [className]="currentIndex == i ? \'active\' : \'\'"\n        [hidden]="shouldHideVendor(vendor)"\n      >\n        <a\n          (click)="handleSectionClick(i)"\n        >\n          <i\n            class="fa fa-chevron-down"\n          ></i>\n          {{vendor.VendorCategory.name}}\n        </a>\n\n        <div [hidden]="currentIndex != i">\n          <div class="header">\n            <i\n              class="fa fa-heart"\n              (click)="addToFavourites(vendor)"\n              [ngClass]="{\'fa\': true, \'fa-heart-o black\': !vendor.favourite, \'fa-heart red\': vendor.favourite}"\n            ></i>\n            <div class="title">{{ vendor.Vendor[0].company_name }}</div>\n            <a\n              class="select-button"\n              (click)="selectVendor(vendor)"\n              [ngClass]="{\'selected\': selectedVendor && vendor.Vendor[0].id == selectedVendor.Vendor[0].id }"\n            >\n              select\n            </a>\n          </div>\n          <div class="blurb">{{ vendor.Vendor[0].blurb }}</div>\n          <pre class="description">{{ vendor.Vendor[0].description }}</pre>\n          <video\n            controls\n            preload="none"\n            [poster]="storage.primaryDomain + vendor.Vendor[0].video_thumb"\n            *ngIf="vendor.Vendor[0].video_url"\n          >\n            <source\n              [src]="storage.primaryDomain + vendor.Vendor[0].video_url"\n              type="video/mp4"\n            >\n            <p>Video not supported.</p>\n          </video>\n        </div>\n      </li>\n    </ul>\n  </div>\n\n</ion-content>\n\n<div\n  class="bottom-button"\n  *ngIf="selectedVendor"\n  (click)="goToReferralDetails()"\n>\n  Next\n</div>\n'/*ion-inline-end:"/home/phauser/Development/refersquare/ReferSquare-mobile/src/pages/serviceCategories/serviceCategories.html"*/,
+        selector: 'page-service-categories',template:/*ion-inline-start:"/home/phauser/Development/refersquare/ReferSquare-mobile/src/pages/serviceCategories/serviceCategories.html"*/'<ion-header>\n  <ion-navbar>\n    <div class="ion-title">Service Categories</div>\n    <button ion-button icon-only menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n\n  <div\n    class="search-container"\n  >\n    <input\n      type="text"\n      [(ngModel)]="search"\n      placeholder="Search Service Providers"\n    />\n    <i class="fa fa-search"></i>\n  </div>\n\n  <div\n    class="container"\n  >\n    <a\n      class="gray-button"\n      (click)="showFavouritesOnly()"\n    >\n      {{ onlyFavourites ? "Show All" : "Show Favourites Only" }}\n    </a>\n\n    <p\n      class="center"\n    >\n      (Expand a category, and select a Service Provider)\n    </p>\n\n    <ul class="list">\n      <li\n        *ngFor="let vendorCategoryGroup of vendors; let i = index"\n        [hidden]="shouldHideVendorGroup(vendorCategoryGroup)"\n        [attr.data-index]="i"\n        [className]="currentIndex === i ? \'active\' : \'\'"\n      >\n        <a\n          (click)="handleSectionClick(i)"\n        >\n          <i\n            class="fa fa-chevron-down"\n          ></i>\n          {{vendorCategoryGroup.VendorCategory.name}}\n        </a>\n\n        <div\n          *ngFor="let vendor of vendorCategoryGroup.Vendor; let idx = index"\n          [hidden]="currentIndex !== i || shouldHideVendor(vendor)">\n          <div class="header">\n            <i\n              class="fa fa-heart"\n              (click)="addToFavourites(vendor)"\n              [ngClass]="{\'fa\': true, \'fa-heart-o black\': !vendor.favourite, \'fa-heart red\': vendor.favourite}"\n            ></i>\n            <div class="title">{{ vendor.company_name }}</div>\n            <a\n              class="select-button"\n              (click)="selectVendor(vendor, vendorCategoryGroup.VendorCategory)"\n              [ngClass]="{\'selected\': selectedVendor && vendor.id == selectedVendor.id }"\n            >\n              select\n            </a>\n          </div>\n          <div class="blurb">{{ vendor.blurb }}</div>\n          <pre class="description">{{ vendor.description }}</pre>\n          <video\n            controls\n            preload="none"\n            [poster]="storage.primaryDomain + vendor.video_thumb"\n            *ngIf="vendor.video_url"\n          >\n            <source\n              [src]="storage.primaryDomain + vendor.video_url"\n              type="video/mp4"\n            >\n            <p>Video not supported.</p>\n          </video>\n        </div>\n      </li>\n    </ul>\n  </div>\n\n</ion-content>\n\n<div\n  class="bottom-button"\n  *ngIf="selectedVendor"\n  (click)="goToReferralDetails()"\n>\n  Next\n</div>\n'/*ion-inline-end:"/home/phauser/Development/refersquare/ReferSquare-mobile/src/pages/serviceCategories/serviceCategories.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
         __WEBPACK_IMPORTED_MODULE_2__services_globalstorage_globalstorage__["a" /* GlobalStorage */],
@@ -1942,10 +1967,10 @@ var ReferralDetailsPage = (function () {
     ReferralDetailsPage.prototype.ionViewDidLoad = function () {
         var _this = this;
         this.vendor = this.navParams.get('vendor');
-        this.lead.vendor_id = this.vendor['Vendor'][0]['id'];
-        this.lead.vendor_category_id = this.vendor['VendorCategory']['id'];
+        this.lead.vendor_id = this.vendor.vendor.id;
+        this.lead.vendor_category_id = this.vendor.vendorCategory.id;
         this.lead.user_id = JSON.parse(localStorage.getItem('User'))['id'];
-        this.api.getVendorQuestions(this.vendor['Vendor'][0]['id'])
+        this.api.getVendorQuestions(this.vendor.vendor.id)
             .then(function (response) {
             if (!response) {
                 _this.additional_information = [];
