@@ -27811,8 +27811,7 @@ html {
 }
 
 ion-content[city-bg] {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(5%, rgba(238, 198, 199, 0.6)), color-stop(60%, rgba(60, 60, 60, 0.6)), to(rgba(20, 20, 20, 0.9))) no-repeat fixed, url(../assets/imgs/city.png) center;
-  background: linear-gradient(to bottom, rgba(238, 198, 199, 0.6) 5%, rgba(60, 60, 60, 0.6) 60%, rgba(20, 20, 20, 0.9) 100%) no-repeat fixed, url(../assets/imgs/city.png) center;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(86, 191, 233, 0.9) 60%, rgba(0, 119, 178, 0.6) 100%) no-repeat fixed, url(../assets/imgs/city.png) center;
   background-size: cover;
   height: 100%;
   padding: 1rem;
@@ -28349,7 +28348,7 @@ page-dashboard .logo {
 }
 
 page-dashboard .logo img {
-  width: 33.333%;
+  width: 80%;
   max-width: 100%;
   height: auto;
   border: 0;
@@ -28785,7 +28784,7 @@ page-login .scroll-content .logo {
 }
 
 page-login .scroll-content .logo img {
-  width: 41.66667%;
+  width: 100%;
   max-width: 100%;
   height: auto;
   border: 0;
