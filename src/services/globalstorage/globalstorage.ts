@@ -9,8 +9,7 @@ export class GlobalStorage {
     loginVars: false,
     type: ""
   };
-  public primaryDomain: string = 'http://139.59.178.1:4000/';
-  // public primaryDomain: string = 'http://refersquare-dev.businessapps.co.uk';
+  public primaryDomain: string = 'http://157.245.36.90:4000/';
   public baseUrl: string = `${this.primaryDomain}/api`;
   public user: any;
 

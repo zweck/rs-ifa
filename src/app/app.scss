@@ -3,7 +3,7 @@ html {
 }
 
 ion-content[city-bg]{
-  background: linear-gradient(to bottom, rgba(238, 198, 199, .6) 5%, rgba(60, 60, 60, .6) 60%, rgba(20, 20, 20, .9) 100%) no-repeat fixed, url(../assets/imgs/city.png) center;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 5%, rgba(86, 191, 233, 0.9) 60%, rgba(0, 119, 178, 0.6) 100%) no-repeat fixed, url(../assets/imgs/city.png) center;
   background-size: cover;
 
   height: 100%;
@@ -48,7 +48,7 @@ form {
     &::placeholder{
       color: gray
     }
-  },
+  }
   select {
     -webkit-appearance: none;
     -moz-appearance: none;
