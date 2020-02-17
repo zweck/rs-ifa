@@ -63,7 +63,7 @@
             <div class="title">{{ vendor.company_name }}</div>
             <a
               class="select-button"
-              (click)="selectVendor(vendor)"
+              (click)="selectVendor(vendor, vendorCategoryGroup.VendorCategory)"
               [ngClass]="{'selected': selectedVendor && vendor.id == selectedVendor.id }"
             >
               select

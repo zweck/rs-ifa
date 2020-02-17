@@ -68,11 +68,11 @@ export class ServiceCategoriesPage {
     this.onlyFavourites = !this.onlyFavourites;
   }
 
-  selectVendor(vendor){
-    if(this.selectedVendor && this.selectedVendor.id == vendor.id){
+  selectVendor(vendor, vendorCategory){
+    if(this.selectedVendor && this.selectedVendor.vendor.id == vendor.id){
       this.selectedVendor = null;
     }else{
-      this.selectedVendor = vendor;
+      this.selectedVendor = { vendor, vendorCategory };
     }
   }
 

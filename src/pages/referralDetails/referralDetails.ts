@@ -61,11 +61,11 @@ export class ReferralDetailsPage {
 
   ionViewDidLoad(){
     this.vendor = this.navParams.get('vendor');
-    this.lead.vendor_id = this.vendor['Vendor'][0]['id'];
-    this.lead.vendor_category_id = this.vendor['VendorCategory']['id'];
+    this.lead.vendor_id = this.vendor.vendor.id;
+    this.lead.vendor_category_id = this.vendor.vendorCategory.id;
     this.lead.user_id = JSON.parse(localStorage.getItem('User'))['id'];
 
-    this.api.getVendorQuestions(this.vendor['Vendor'][0]['id'])
+    this.api.getVendorQuestions(this.vendor.vendor.id)
       .then(response => {
         if (!response) {
           this.additional_information = [];
