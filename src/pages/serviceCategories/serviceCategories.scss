@@ -5,6 +5,28 @@ page-service-categories {
     padding: 0 !important;
   }
 
+
+  @media (min-width:961px)  {
+
+      .scroll-content {
+          max-width: 40rem;
+          margin: 0 auto;
+      }
+
+      .search-container {
+          margin-top: 1rem;
+          border-radius: 0.5rem;
+      }
+
+      .bottom-button {
+          max-width: 40rem;
+          left: 50%;
+          transform: translate(-50%, 0);
+          margin-bottom: 1rem;
+          border-radius: 0.5rem;
+      }
+  }
+
   .search-container {
     background-color: map-get($colors, "primary-accent");
     padding: 10px;
