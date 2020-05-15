@@ -949,11 +949,6 @@ var Api = (function () {
                     _this.cache.setData('vendorQuestions' + vendor, response);
                     resolve(response);
                 }, function (error) {
-                    var response = _this.cache.getData('vendorQuestions' + vendor);
-                    if (!response) {
-                        _this.alertNoCache();
-                        return false;
-                    }
                 }, function () {
                 });
             });
@@ -998,11 +993,6 @@ var Api = (function () {
                     _this.cache.setData('EarningsHistory', response);
                     resolve(response);
                 }, function (error) {
-                    var response = _this.cache.getData('EarningsHistory');
-                    if (!response) {
-                        _this.alertNoCache();
-                        return false;
-                    }
                 }, function () {
                 });
             });
@@ -1051,6 +1041,7 @@ var Api = (function () {
         };
     }
     Api.prototype.alertNoCache = function () {
+        console.trace();
         var alert = this.alertCtrl.create({
             title: 'No cached data',
             subTitle: 'You must use the app online at least once',
