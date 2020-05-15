@@ -146,6 +146,9 @@ ion-header span.back-button-text.back-button-text-ios {
 
 .back-button{
   margin-top: -8px;
+  @media (min-width:961px)  {
+      height: 56px;
+  }
   &.show-back-button {
     display: inline-block;
     position: absolute;

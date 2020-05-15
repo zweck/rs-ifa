@@ -18,6 +18,7 @@ export class Api {
   }
 
   alertNoCache() {
+      console.trace()
     const alert = this.alertCtrl.create({
       title: 'No cached data',
       subTitle: 'You must use the app online at least once',
@@ -251,11 +252,6 @@ export class Api {
             resolve(response)
           },
           error => {
-            let response = this.cache.getData('vendorQuestions' + vendor);
-            if (!response) {
-              this.alertNoCache();
-              return false;
-            }
           },
           () => {
 
@@ -321,11 +317,6 @@ export class Api {
             resolve(response)
           },
           error => {
-            let response = this.cache.getData('EarningsHistory');
-            if (!response) {
-              this.alertNoCache();
-              return false;
-            }
           },
           () => {
 

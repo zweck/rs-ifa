@@ -1,7 +1,12 @@
 @media (min-width:961px)  {
+    .content {
+        overflow: auto;
+    }
+
     .scroll-content{
         max-width: 40rem;
         margin: 0 auto;
+        overflow: visible !important;
     }
 }
 

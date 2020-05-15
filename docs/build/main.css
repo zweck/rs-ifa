@@ -1,3 +1,10 @@
+@media (min-width: 961px) {
+  .scroll-content {
+    max-width: 40rem;
+    margin: 0 auto;
+  }
+}
+
 .ion-ios-add:before {
   content: "\f102";
 }
@@ -28263,6 +28270,16 @@ page-dashboard .scroll-content {
   font-size: 16px;
 }
 
+@media (min-width: 961px) {
+  page-dashboard .scroll-content {
+    max-width: 40rem;
+    margin: 0 auto;
+  }
+  page-dashboard .scroll-content .logo {
+    max-width: 17rem;
+  }
+}
+
 page-dashboard ion-header {
   position: fixed;
   top: 0;
@@ -28771,6 +28788,8 @@ page-lead-thanks .scroll-content .bottom .transparent-rounded-button {
 }
 
 page-login .scroll-content {
+  max-width: 40rem;
+  margin: 0 auto;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -28942,6 +28961,13 @@ page-profile .profile-photo img {
   height: 100%;
 }
 
+@media (min-width: 961px) {
+  page-referral-details .scroll-content #register-form {
+    max-width: 40rem;
+    margin: 0 auto;
+  }
+}
+
 page-referral-details .scroll-content .question .question {
   font-weight: 500;
   color: #7F8A97;
@@ -29076,6 +29102,25 @@ page-service-categories .scroll-content {
   background-color: #EFEFEF;
   background-image: none;
   padding: 0 !important;
+}
+
+@media (min-width: 961px) {
+  page-service-categories .scroll-content {
+    max-width: 40rem;
+    margin: 0 auto;
+  }
+  page-service-categories .search-container {
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+  }
+  page-service-categories .bottom-button {
+    max-width: 40rem;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+  }
 }
 
 page-service-categories .search-container {
@@ -29289,6 +29334,13 @@ page-settings .scroll-content {
   background-color: #EFEFEF;
   background-image: none;
   padding: 1rem;
+}
+
+@media (min-width: 961px) {
+  page-settings .scroll-content {
+    max-width: 40rem;
+    margin: 0 auto;
+  }
 }
 
 page-settings section {
