@@ -7,116 +7,73 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+  <!--<small class="alert text-center mb3 bg-silver black rounded block" *ngIf="!connection.online">-->
+  <!--You are currently offline. For the best experience please connect to the internet. <a-->
+  <!--href="#/app/offline">More Information</a>-->
+  <!--</small>-->
 
-    <!--<small class="alert text-center mb3 bg-silver black rounded block" *ngIf="!connection.online">-->
-      <!--You are currently offline. For the best experience please connect to the internet. <a-->
-      <!--href="#/app/offline">More Information</a>-->
-    <!--</small>-->
-
-  <section
-    [navPush]="profilePage"
-  >
+  <section [navPush]="profilePage">
     <a>
-      <img [src]="current_user.profile_photo"/>
+      <img [src]="current_user.profile_photo" />
       <div class="name">
-        <div class="name">{{current_user.first_name}} {{current_user.last_name}}</div>
-        <div class="company">{{current_user.company}}</div>
+        <div class="name">
+          {{ current_user.first_name }} {{ current_user.last_name }}
+        </div>
+        <div class="company">{{ current_user.company }}</div>
       </div>
     </a>
   </section>
 
   <section>
     <ul>
-      <li
-        [navPush]="profilePage"
-      >
-        <div
-          *ngIf="!connection.online">
+      <li [navPush]="profilePage">
+        <div *ngIf="!connection.online">
           <div>
             Edit Profile
             <small>Unavailable offline</small>
           </div>
         </div>
-        <a
-          *ngIf="connection.online"
-        >
+        <a *ngIf="connection.online">
           Edit Profile
           <span class="fa fa-chevron-right"></span>
         </a>
       </li>
 
-
-      <li
-        [navPush]="paypalSettingsPage"
-      >
-        <div
-          *ngIf="!connection.online">
+      <li [navPush]="paypalSettingsPage">
+        <div *ngIf="!connection.online">
           <div>
             Bank Account Settings
             <small>Unavailable offline</small>
           </div>
         </div>
-        <a
-          *ngIf="connection.online"
-        >
+        <a *ngIf="connection.online">
           Bank Account Settings
           <span class="fa fa-chevron-right"></span>
         </a>
       </li>
 
-
-      <li
-        [navPush]="notificationsSettingsPage"
-      >
-        <div
-          *ngIf="!connection.online">
+      <li [navPush]="notificationsSettingsPage">
+        <div *ngIf="!connection.online">
           <div>
             Notifications Settings
             <small>Notifications Settings</small>
           </div>
         </div>
-        <a
-          *ngIf="connection.online"
-        >
+        <a *ngIf="connection.online">
           Notifications Settings
           <span class="fa fa-chevron-right"></span>
         </a>
       </li>
 
-
-      <li
-        [navPush]="leadHistoryPage"
-      >
-        <div
-          *ngIf="!connection.online">
+      <li [navPush]="leadHistoryPage">
+        <div *ngIf="!connection.online">
           <div>
             Earnings History
             <small></small>
           </div>
         </div>
-        <a
-          *ngIf="connection.online"
-        >
+        <a *ngIf="connection.online">
           Earnings History
-          <span class="fa fa-chevron-right"></span>
-        </a>
-      </li>
-
-
-      <li
-        [navPush]="withdrawalHistoryPage"
-      >
-        <div
-          *ngIf="!connection.online">
-          <div>
-            Withdrawal History
-            <small>Withdrawal History</small>
-          </div>
-        </div>
-        <a
-          *ngIf="connection.online"
-        >
-          Withdrawal History
           <span class="fa fa-chevron-right"></span>
         </a>
       </li>
@@ -125,57 +82,40 @@
 
   <section>
     <ul>
-      <li
-        [navPush]="faqPage"
-      >
-        <div
-          *ngIf="!connection.online">
+      <li [navPush]="faqPage">
+        <div *ngIf="!connection.online">
           <div>
             Frequently Asked Questions
             <small>Unavailable offline</small>
           </div>
         </div>
-        <a
-          *ngIf="connection.online"
-        >
+        <a *ngIf="connection.online">
           Frequently Asked Questions
           <span class="fa fa-chevron-right"></span>
         </a>
       </li>
 
-
-      <li
-        [navPush]="termsPage"
-      >
-        <div
-          *ngIf="!connection.online">
+      <li [navPush]="termsPage">
+        <div *ngIf="!connection.online">
           <div>
             Terms &amp; Conditions
             <small>Unavailable offline</small>
           </div>
         </div>
-        <a
-          *ngIf="connection.online"
-        >
+        <a *ngIf="connection.online">
           Terms &amp; Conditions
           <span class="fa fa-chevron-right"></span>
         </a>
       </li>
 
-
-      <li
-        [navPush]="tourPage"
-      >
-        <div
-          *ngIf="!connection.online">
+      <li [navPush]="tourPage">
+        <div *ngIf="!connection.online">
           <div>
             About this App
             <small>Notifications Settings</small>
           </div>
         </div>
-        <a
-          *ngIf="connection.online"
-        >
+        <a *ngIf="connection.online">
           About this App
           <span class="fa fa-chevron-right"></span>
         </a>
@@ -184,11 +124,7 @@
   </section>
 
   <!-- Button (grey) -->
-  <button
-    class="submit-button gray"
-    (click)="logout()"
-  >
+  <button class="submit-button gray" (click)="logout()">
     Log Out
   </button>
-
 </ion-content>
