@@ -9,7 +9,7 @@ export class GlobalStorage {
     loginVars: false,
     type: ""
   };
-  public primaryDomain: string = 'http://157.245.36.90:4000/';
+  public primaryDomain: string = 'http://ifa.zweck.software:4000/';
   public baseUrl: string = `${this.primaryDomain}/api`;
   public user: any;
 
