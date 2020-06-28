@@ -1,23 +1,26 @@
 {
+  "version": "0.0.1",
   "name": "IFA Connect",
   "short_name": "IFA Connect",
   "start_url": "index.html",
   "display": "standalone",
-  "icons": [{
-    "src": "assets/imgs/logo.png",
-    "sizes": "512x512",
-    "type": "image/png"
-  },
-  {
-    "src": "assets/imgs/icons-72.png",
-    "sizes": "72x72",
-    "type": "image/png"
-  },
-  {
-    "src": "assets/imgs/icons-72@2x.png",
-    "sizes": "144x144",
-    "type": "image/png"
-  }],
+  "icons": [
+    {
+      "src": "assets/imgs/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/imgs/icons-72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/imgs/icons-72@2x.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ],
   "background_color": "#4e8ef7",
   "theme_color": "#4e8ef7"
 }
