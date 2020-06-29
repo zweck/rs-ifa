@@ -551,7 +551,7 @@ var GlobalStorage = (function () {
             loginVars: false,
             type: ""
         };
-        this.primaryDomain = 'http://ifa.zweck.software:4000/';
+        this.primaryDomain = 'http://178.62.54.34:4000/';
         this.baseUrl = this.primaryDomain + "/api";
         this.authHelper = function () {
             var date = Math.floor(new Date().getTime() / 1000).toString();
