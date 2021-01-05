@@ -34,7 +34,7 @@
     "@ionic-native/status-bar": "^4.3.0",
     "@ionic-native/transfer": "^3.14.0",
     "@ionic/storage": "2.0.1",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "cordova": "^6.0.0",
     "cordova-android": "6.3.0",
     "cordova-browser": "^6.0.0",
